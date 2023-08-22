@@ -1,1 +1,44 @@
-WIP
+# Webserverin dokumentaatio
+
+Asennuspolku: C:\Program Files\nodejs\
+
+package name: (webserver)
+version: (1.0.0)
+description:
+entry point: (index.js)
+test command:
+git repository: github.com/PatrickLindstrom/Webproject
+keywords: webproject
+author: Patrick
+license: (ISC)
+About to write to C:\Users\Patrick\Documents\Webserver\package.json:
+
+```{
+  "name": "webserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/PatrickLindstrom/Webproject"
+  },
+  "keywords": [
+    "webproject"
+  ],
+  "author": "Patrick",
+  "license": "ISC"
+}```
+
+Express kirjaston asennus
+
+```npm install express```
+
+added 58 packages, and audited 59 packages in 4s
+
+8 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
