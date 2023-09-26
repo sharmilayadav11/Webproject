@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <!-- Include your head content here -->
+    <style>
+        /* Add CSS to center-align the h1 element and the chart containers */
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 100px; /* Adjust the top margin to control the vertical position of the header */
+        }
+
+        /* Center-align the chart containers */
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 525px; /* Set the desired height */
+        }
+
+        /* Style for the dropdown menu */
+        .dropdown {
+            position: absolute;
+            top: 20px; /* Adjust the top position as needed */
+            left: 20px; /* Adjust the left position as needed */
+        }
+
+        /* Style for the dropdown button */
+        .dropdown-button {
+            background-color: #1086e7;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 2px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style for the dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1c69ce;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Style for the dropdown content links */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #f3f3f3;
+        }
+
+        /* Show the dropdown content on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Style for the white box */
+        .white-box {
+            background-color: white;
+            padding: 12px;
+            margin: 10px auto;
+            border: 2px solid black;
+            border-radius: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dropdown menu -->
+    <div class="dropdown">
+        <button class="dropdown-button">Menu</button>
+        <div class="dropdown-content">
+            <a href="/menu?item=hintaseuranta&page=hourly">Hintaseuranta</a>
+            <a href="/menu?item=weather&page=weather">Weather</a>
+
+        </div>
+    </div>
+
+    <h1>Tervetuloa pörssisähkön hintaseurantaan!</h1>
+
+    <!-- Include the Plotly script -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Create a container for charts and center-align it -->
+    <div class="chart-container">
+        <!-- Chart 1 -->
+        <div id="myDiv2" style="width: 50%; border: 2px solid black; border-radius: 5px;"></div>
+    </div>
+
+    <!-- Create a container for charts and center-align it -->
+    <div class="chart-container">
+        <!-- Chart 2 -->
+        <div id="barChart" style="width: 50%; border: 2px solid black; border-radius: 5px;"></div>
+    </div>
+
+    <!-- Container for the white box -->
+    <div class="chart-container">
+        <div class="white-box">
+            <h2>Electricity Calculations:</h2>
+            <!-- Calculated values will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        var xValues = [
+            "00:00-01:00", "01:00-02:00", "02:00-03:00", "03:00-04:00", "04:00-05:00", "05:00-06:00",
+            "06:00-07:00", "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00",
+            "12:00-13:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00",
+            "18:00-19:00", "19:00-20:00", "20:00-21:00", "21:00-22:00", "22:00-23:00", "23:00-00:00"
+        ];
+
+        var yValues = [
+            0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.1, 1.3, 1.2, 1.5, 1.6, 1.8, 1.7, 1.9, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 1.2, 1.3, 1.4
+        ];
+
+        var trace = {
+            x: xValues,
+            y: yValues,
+            mode: 'scatter',
+            marker: {
+                size: 10,
+                color: 'blue'
+            }
+        };
+
+        var data = [trace];
+
+        var layout = {
+            title: 'Sähkön tuntihinnat kaaviossa',
+            xaxis: {
+                title: 'Tunti'
+            },
+            yaxis: {
+                title: 'Hinta snt / kWh',
+                range: [0, 2.0]
+            }
+        };
+
+        Plotly.newPlot('myDiv2', data, layout);
+
+        var xValuesBar = [
+            "00:00-01:00", "01:00-02:00", "02:00-03:00", "03:00-04:00", "04:00-05:00", "05:00-06:00",
+            "06:00-07:00", "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00",
+            "12:00-13:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00",
+            "18:00-19:00", "19:00-20:00", "20:00-21:00", "21:00-22:00", "22:00-23:00", "23:00-00:00"
+        ];
+
+        var yValuesBar = [
+            0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.1, 1.3, 1.2, 1.5, 1.6, 1.8, 1.7, 1.9, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 1.2, 1.3, 1.4, 1.0, 1.2, 1.1, 1.3, 1.2, 1.5, 1.6, 1.8, 1.7
+        ];
+
+        var traceBar = {
+            x: xValuesBar,
+            y: yValuesBar,
+            type: 'bar',
+            marker: {
+                color: 'blue'
+            }
+        };
+
+        var dataBar = [traceBar];
+
+        var layoutBar = {
+            title: 'Sähkön tuntihinnat diagrammissa',
+            xaxis: {
+                title: 'Tunti'
+            },
+            yaxis: {
+                title: 'Hinta snt / kWh',
+                range: [0, 2.0]
+            }
+        };
+
+        Plotly.newPlot('barChart', dataBar, layoutBar);
+
+        // Calculate highest electricity hour
+        var highestHourIndex = yValuesBar.indexOf(Math.max(...yValuesBar));
+        var highestHour = xValuesBar[highestHourIndex];
+
+        // Calculate lowest electricity hour
+        var lowestHourIndex = yValuesBar.indexOf(Math.min(...yValuesBar));
+        var lowestHour = xValuesBar[lowestHourIndex];
+
+        // Calculate today's average price for electricity
+        var totalPrices = yValuesBar.reduce((total, price) => total + price, 0);
+        var averagePrice = totalPrices / yValuesBar.length;
+
+        // Display the calculated values in the white box
+        var whiteBox = document.querySelector('.white-box');
+        whiteBox.innerHTML = '<h2>Sähkö laskelmat</h2>';
+        whiteBox.innerHTML += '<p>Kallein sähkötunti: ' + highestHour + '</p>';
+        whiteBox.innerHTML += '<p>Halvin sähkötunti: ' + lowestHour + '</p>';
+        whiteBox.innerHTML += '<p>Tämän päivän keskiarvo: ' + averagePrice.toFixed(2) + ' snt / kWh</p>';
+    </script>
+</body>
+</html>
