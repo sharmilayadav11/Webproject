@@ -57,7 +57,7 @@ app.get('/hourly', async (req, res) => {
     try {
         const current_prices = await pool.query('SELECT * FROM current_prices');
         console.log(current_prices);
-        res.render('hourly', { current_prices: JSON.stringify(current_prices) }); 
+        res.render('hourly', { current_prices: JSON.stringify(current_prices) });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to fetch electricity prices' });
