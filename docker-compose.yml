@@ -1,0 +1,12 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: smart_home
+      POSTGRES_PASSWORD: smart_home
+      POSTGRES_DB: smart_home
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d

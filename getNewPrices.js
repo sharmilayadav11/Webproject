@@ -1,6 +1,7 @@
 // FETCH ELECTRICITY PRICE DATA FROM PORSSISAHKO.NET
 // =================================================
 
+const fetch = require('node-fetch-commonjs'); // For making HTTP requests in Node.js
 // Set the URL for API endpoint: latest prices at 14.00 EET or 15.00 at Finnish summertime
 const LATEST_PRICES_ENDPOINT = 'https://api.porssisahko.net/v1/latest-prices.json';
 

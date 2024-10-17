@@ -6,7 +6,7 @@
 
 // Load necessary Express libraries
 const express = require('express');
-const fetch = require('node-fetch'); // For making HTTP requests in Node.js
+const fetch = require('node-fetch-commonjs'); // For making HTTP requests in Node.js
 const { engine } = require('express-handlebars');
 // Home made module to get current price
 const cprice = require('./getHomePageData')

@@ -21,10 +21,10 @@ const logger = require('./logger')
 
 // Create a new pool for Postgres connections
 const pool = new Pool({
-  user: 'postgres', // In production always create a new user for the app
-  password: 'Q2werty',
+  user: 'smart_home', // In production always create a new user for the app
+  password: 'smart_home',
   host: 'localhost', // Or localhost or 127.0.0.1 if in the same computer
-  database: 'postgres',
+  database: 'smart_home',
   port: 5432
 });
 
@@ -37,7 +37,8 @@ let message = ''
 const logFile = 'dataOperations.log'
 
 // Try to run an operation in 5-minute intervals from 3 to 4 PM
-cron.schedule('*/5 15 * * *', () => {
+cron.schedule('* * * * *', () => {
+  console.log("started cron");
   try {
     let timestamp = new Date(); // Get the current timestamp
     let dateStr = timestamp.toLocaleDateString(); // Take date part of the timestamp
@@ -54,9 +55,8 @@ cron.schedule('*/5 15 * * *', () => {
         // Loop through prices data and pick startDate and price elements
         json.prices.forEach(async (element) => {
           let values = [element.startDate, element.price];
-
           // Build an SQL clause to insert values into the table
-          const sqlClause = 'INSERT INTO public.hourly_price VALUES ($1, $2) ON CONFLICT DO NOTHING RETURNING *';
+          const sqlClause = 'INSERT INTO public.current_prices VALUES ($2, $1) ON CONFLICT DO NOTHING RETURNING *';
 
           // Function for running SQL operations asynchronously
           const runQuery = async () => {
