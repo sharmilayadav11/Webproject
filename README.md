@@ -1,5 +1,15 @@
 # Sähkönseuranta
- 
+ It is app developed using node js which helps to show cost of electricity on daily hourly basis. 
+ It shows Electricity calculations with its timing
+The most expensive electricity hour: 1 hour time frame (e.g.19:00-20:00)
+The cheapest electricity hour: 1 hour time frame (e.g. 00:00-01:00)
+Today's average: in cents / kWh
+
+It uses API from porssisahko.net to get current prices of electricity.
+https://api.porssisahko.net/v1/latest-prices.json
+
+In this posGres is used via docker container.
+
 ## In order to run
 ###  Use docker to start the postgres
  
